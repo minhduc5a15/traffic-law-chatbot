@@ -1,3 +1,16 @@
-venv/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+faiss_index/
+
+# IDE
+.vscode/
+.idea/
