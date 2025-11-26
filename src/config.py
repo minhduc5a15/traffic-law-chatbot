@@ -11,3 +11,5 @@ VECTOR_DB_DIR = os.path.join(BASE_DIR, "faiss_index")
 EMBEDDING_MODEL_NAME = "keepitreal/vietnamese-sbert" 
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
+LLM_MODEL_NAME = "qwen2.5:3b"
+LLM_TEMPERATURE = 0.3
