@@ -1,3 +1,6 @@
+rich
+langchain-google-genai
+python-docx
 langchain-ollama
 langchain-huggingface
 langchain-community
