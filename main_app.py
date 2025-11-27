@@ -1,22 +1,29 @@
 from src.chatbot import TrafficLawChatbot
 import os
+from rich.console import Console
+from rich.markdown import Markdown
+from rich.panel import Panel
+
+console = Console()
+
 
 def main():
-    # Xoa man hinh cho sach
-    os.system('clear' if os.name == 'posix' else 'cls')
+    os.system("clear" if os.name == "posix" else "cls")
 
-    print("=== CHATBOT LUAT GIAO THONG (Ver 1.0) ===")
-    print("Dang khoi dong he thong...")
+    console.print("[bold cyan]=== CHATBOT LUAT GIAO THONG (Ver 1.0) ===[/bold cyan]")
+    console.print("Đang khởi động hệ thống...\n")
 
     bot = TrafficLawChatbot()
 
-    print("\nHe thong da san sang! (Go 'exit' de thoat)")
+    console.print(
+        "[bold green]Hệ thống đã sẵn sàng! (Gõ 'exit' để thoát)[/bold green]\n"
+    )
 
     while True:
         try:
-            question = input("\n[BAN]: ")
-            if question.lower() in ['exit', 'quit']:
-                print("Tam biet!")
+            question = console.input("[bold yellow][BAN]: [/bold yellow]")
+            if question.lower() in ["exit", "quit"]:
+                console.print("[bold red]Tạm biệt![/bold red]")
                 break
 
             if not question.strip():
@@ -24,15 +31,22 @@ def main():
 
             response, sources = bot.ask(question)
 
-            print(f"\n[BOT]: {response}")
-            print("\n--- Nguon tham khao ---")
-            for src in sources:
-                print(f"- {os.path.basename(src)}")
+            md = Markdown(response)
+            console.print(
+                Panel(md, title="[BOT]", title_align="left", border_style="blue")
+            )
+
+            if sources:
+                console.print("\n[bold magenta]Nguồn tham khảo:[/bold magenta]")
+                for src in sources:
+                    console.print(f"- {os.path.basename(src)}")
 
         except KeyboardInterrupt:
+            console.print("\n[bold red]Tạm biệt![/bold red]")
             break
         except Exception as e:
-            print(f"Da xay ra loi: {e}")
+            console.print(f"[bold red]Đã xảy ra lỗi:[/bold red] {e}")
+
 
 if __name__ == "__main__":
     main()
